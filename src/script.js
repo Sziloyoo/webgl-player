@@ -1,8 +1,12 @@
 import Player from "./Player/Player.js"
 
-const config = await loadConfiguration("https://test-files.vercel.app/elefant.json")
-const container = document.querySelector('.canvas-container')
-const canvas = document.querySelector('canvas.webgl')
+const config = undefined
+const config2 = await loadConfiguration("https://test-files.vercel.app/elefant.json")
+const container = document.getElementById('con-1')
+const canvas = document.getElementById('c1')
+
+const container2 = document.getElementById('con-2')
+const canvas2 = document.getElementById('c2')
 
 const player = new Player(container, canvas, config)
 

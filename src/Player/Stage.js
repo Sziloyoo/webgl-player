@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import Lighting from "./Lighting.js"
 import Player from "./Player.js"
 import Model from "./Model.js"
+import TextTest from './TextTest.js'
 
 export default class Stage {
     constructor(params) {
@@ -14,6 +15,10 @@ export default class Stage {
 
         this.lighting = new Lighting(this.params.lighting)
 
+        /* Testing */
+        this.test = new TextTest()
+        this.scene.add(this.test.GO)
+
         // Check if fallback is used
         if(params.source.name === "fallback") this.fallback()
 
@@ -24,7 +29,8 @@ export default class Stage {
     }
 
     update() {
-        if (this.model) this.model.update()
+        this.model?.update()
+        this.test?.update()
     }
 
     setParameters(params) {

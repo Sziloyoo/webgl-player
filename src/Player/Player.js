@@ -61,7 +61,7 @@ export default class Player {
     }
 
     load(config) {
-        if(this.debug.active) this.debug.load(config.source)
+        if (this.debug.active) this.debug.load(config.source)
         this.loader.startLoading(config.source)
         this.camera.setParameters(config.camera)
         this.renderer.setParameters(config.renderer)
