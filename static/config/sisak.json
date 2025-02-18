@@ -1,0 +1,32 @@
+{
+    "source": {
+        "name": "sisak",
+        "type": "gltfModel",
+        "path": "https://test-files.vercel.app/sisak.glb"
+    },
+    "camera": {
+        "fov": 45,
+        "position": { "x": 0, "y": 1, "z": 3 },
+        "target": { "x": 0, "y": 0, "z": 0 },
+        "canZoom": false,
+        "canRotate": true,
+        "autoRotate": true,
+        "autoRotateSpeed": 2.0
+    },
+    "renderer": {
+        "toneMapping": "AgX",
+        "toneMappingExposure": 3.0,
+        "alpha": true,
+        "background": "#222222"
+    },
+    "lighting": {
+        "directionalLightColor": "#ffffff",
+        "directionalLightIntensity": 1.0,
+        "ambientLightColor": "#ffffff",
+        "ambientLightIntensity": 1.0
+    },
+    "model": {
+        "playAnimation": true,
+        "animationSpeed": 1.0
+    }
+}

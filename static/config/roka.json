@@ -1,0 +1,32 @@
+{
+    "source": {
+        "name": "roka",
+        "type": "gltfModel",
+        "path": "https://test-files.vercel.app/roka.glb"
+    },
+    "camera": {
+        "fov": 50,
+        "position": { "x": 0, "y": 64, "z": 168 },
+        "target": { "x": 0, "y": 32, "z": 0 },
+        "canZoom": false,
+        "canRotate": true,
+        "autoRotate": true,
+        "autoRotateSpeed": 2.0
+    },
+    "renderer": {
+        "toneMapping": "Netural",
+        "toneMappingExposure": 1.75,
+        "alpha": false,
+        "background": "#222222"
+    },
+    "lighting": {
+        "directionalLightColor": "#ffffff",
+        "directionalLightIntensity": 1.0,
+        "ambientLightColor": "#ffffff",
+        "ambientLightIntensity": 1.0
+    },
+    "model": {
+        "playAnimation": true,
+        "animationSpeed": 1.0
+    }
+}

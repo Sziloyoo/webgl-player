@@ -1,0 +1,32 @@
+{
+    "source": {
+        "name": "elefant",
+        "type": "gltfModel",
+        "path": "https://test-files.vercel.app/elefant.glb"
+    },
+    "camera": {
+        "fov": 35,
+        "position": { "x": 0, "y": 1.5, "z": 10 },
+        "target": { "x": 0, "y": 2.5, "z": 0 },
+        "canZoom": false,
+        "canRotate": true,
+        "autoRotate": false,
+        "autoRotateSpeed": 2.0
+    },
+    "renderer": {
+        "toneMapping": "ACESFilmic",
+        "toneMappingExposure": 1.75,
+        "alpha": true,
+        "background": "#a59858"
+    },
+    "lighting": {
+        "directionalLightColor": "#ffffff",
+        "directionalLightIntensity": 1.0,
+        "ambientLightColor": "#ffffff",
+        "ambientLightIntensity": 1.5
+    },
+    "model": {
+        "playAnimation": true,
+        "animationSpeed": 1.0
+    }
+}
