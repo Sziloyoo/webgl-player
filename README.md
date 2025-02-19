@@ -9,7 +9,7 @@ npm run dev
 A player object has three parameters:
 - canvas container (div)
 - HTML canvas
-- configuration file (a JSON file, with the required values as seen in the example above)
+- configuration file (a JSON file, with the required values as seen in the example below)
 
 ```js
 const config = await loadConfiguration("https://test-files.vercel.app/elefant.json")
