@@ -1,14 +1,17 @@
 import Player from "./Player/Player.js"
 
-const config = undefined
-const config2 = await loadConfiguration("https://test-files.vercel.app/elefant.json")
+// Config files
+const config_empty = undefined
+const config_sisak = await loadConfiguration("https://test-files.vercel.app/sisak.json")
+const config_elefant = await loadConfiguration("https://test-files.vercel.app/elefant.json")
+const config_roka = await loadConfiguration("https://test-files.vercel.app/roka.json")
+const config_sziv = await loadConfiguration("https://test-files.vercel.app/sziv.json")
+
+// HTML elements
 const container = document.getElementById('con-1')
 const canvas = document.getElementById('c1')
 
-const container2 = document.getElementById('con-2')
-const canvas2 = document.getElementById('c2')
-
-const player = new Player(container, canvas, config)
+const player = new Player(container, canvas, config_elefant)
 
 async function loadConfiguration(url) {
     let data = undefined

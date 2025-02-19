@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import Lighting from "./Lighting.js"
 import Player from "./Player.js"
 import Model from "./Model.js"
-import TextTest from './TextTest.js'
+import Title from './Utils/Title.js'
 
 export default class Stage {
     constructor(params) {
@@ -13,14 +13,19 @@ export default class Stage {
 
         this.params = params
 
+        this.text = new Title("asd", new THREE.Vector3(3, 3, 3))
+        this.text.setStyle({
+            fontSize: 0.5,
+            fontColor: '#ffffff',
+            fontBold: true,
+            fontStroke: true
+        })
+        this.scene.add(this.text.label)
+
         this.lighting = new Lighting(this.params.lighting)
 
-        /* Testing */
-        this.test = new TextTest()
-        this.scene.add(this.test.GO)
-
         // Check if fallback is used
-        if(params.source.name === "fallback") this.fallback()
+        if (params.source.name === "fallback") this.fallback()
 
         // Wait for resources
         this.loader.on('ready', () => {
@@ -30,13 +35,13 @@ export default class Stage {
 
     update() {
         this.model?.update()
-        this.test?.update()
+        this.text?.update(this.player.camera.instance)
     }
 
     setParameters(params) {
-        this.params = {...params}
-        if(this.fallbackObject) this.scene.remove(this.fallbackObject)
-        if(this.lighting) this.lighting.setParameters(this.params.lighting)
+        this.params = { ...params }
+        if (this.fallbackObject) this.scene.remove(this.fallbackObject)
+        if (this.lighting) this.lighting.setParameters(this.params.lighting)
     }
 
     fallback() {

@@ -35,6 +35,10 @@ export default class Camera {
         this.controls.autoRotateSpeed = this.params.autoRotateSpeed
         this.controls.enableZoom = this.params.canZoom
         this.controls.enableDamping = true
+
+        // Constraints
+        this.controls.minPolarAngle = Math.PI / 9
+        this.controls.maxPolarAngle = Math.PI - (Math.PI / 9)
     }
 
     resize() {

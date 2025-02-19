@@ -86,7 +86,7 @@ export default class Player {
                 toneMapping: "Linear",
                 toneMappingExposure: 1.0,
                 alpha: false,
-                background: "#222222"
+                background: "#888888"
             },
             lighting: {
                 directionalLightColor: "#ffffff",
