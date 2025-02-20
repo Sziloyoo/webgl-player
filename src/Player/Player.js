@@ -41,12 +41,6 @@ export default class Player {
         this.time.on('tick', () => {
             this.update()
         })
-
-        // Debug mode
-        /* if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder({ title: "Player" })
-            this.debugFolder.addButton({ title: "Function" }).on('click', () => console.log("defun"))
-        } */
     }
 
     resize() {
@@ -97,6 +91,14 @@ export default class Player {
             model: {
                 playAnimation: false,
                 animationSpeed: 1.0
+            },
+            text: {
+                fontColor: "#ffffff",
+                fontSize: 0.5,
+                fontBold: true,
+                fontStroke: true,
+                lineColor: "#ffffff",
+                lineWidth: 0.1
             }
         }
     }

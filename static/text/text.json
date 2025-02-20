@@ -2,7 +2,7 @@
     "source": {
         "name": "elefant",
         "type": "gltfModel",
-        "path": "https://test-files.vercel.app/elefant.glb"
+        "path": "./models/elefant.glb"
     },
     "camera": {
         "fov": 35,
@@ -10,6 +10,8 @@
         "target": { "x": 0, "y": 2.5, "z": 0 },
         "canZoom": false,
         "canRotate": true,
+        "orbitHorizontal": { "x": 90, "y": 90 },
+        "orbitVertical": { "x": 70, "y": 70 },
         "autoRotate": false,
         "autoRotateSpeed": 2.0
     },
@@ -31,7 +33,7 @@
     },
     "text": {
         "fontColor": "#ffffff",
-        "fontSize": 0.3,
+        "fontSize": 0.5,
         "fontBold": true,
         "fontStroke": true,
         "lineColor": "#ffffff",

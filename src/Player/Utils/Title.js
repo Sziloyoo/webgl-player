@@ -12,6 +12,7 @@ export default class Title{
         label.anchorY = "bottom"
         label.textAlign = "center"
         label.position.copy(position)
+        label.sync()
         return label
     }
 

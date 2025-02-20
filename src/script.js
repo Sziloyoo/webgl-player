@@ -4,6 +4,7 @@ import Player from "./Player/Player.js"
 const config_empty = undefined
 const config_sisak = await loadConfiguration("https://test-files.vercel.app/sisak.json")
 const config_elefant = await loadConfiguration("https://test-files.vercel.app/elefant.json")
+const config_elefant_text = await loadConfiguration("./text/text.json")
 const config_roka = await loadConfiguration("https://test-files.vercel.app/roka.json")
 const config_sziv = await loadConfiguration("https://test-files.vercel.app/sziv.json")
 
@@ -11,7 +12,7 @@ const config_sziv = await loadConfiguration("https://test-files.vercel.app/sziv.
 const container = document.getElementById('con-1')
 const canvas = document.getElementById('c1')
 
-const player = new Player(container, canvas, config_elefant)
+const player = new Player(container, canvas, config_elefant_text)
 
 async function loadConfiguration(url) {
     let data = undefined

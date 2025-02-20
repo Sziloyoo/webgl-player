@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import Player from './Player.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { degToRad } from 'three/src/math/MathUtils.js'
 
 export default class Camera {
     constructor(params) {
@@ -36,7 +37,7 @@ export default class Camera {
         this.controls.enableZoom = this.params.canZoom
         this.controls.enableDamping = true
 
-        // Constraints
+        // Vertical constraints
         this.controls.minPolarAngle = Math.PI / 9
         this.controls.maxPolarAngle = Math.PI - (Math.PI / 9)
     }
@@ -48,6 +49,30 @@ export default class Camera {
 
     update() {
         this.controls.update()
+    }
+
+    setOrbitLimits(axis, left, right) {
+        // To fix
+        if (axis === "vertical") {
+            if (left >= 180 && right >= 180) {
+                this.controls.maxPolarAngle = Infinity
+                this.controls.minPolarAngle = Infinity
+            }
+            else {
+                this.controls.maxPolarAngle = degToRad(right)
+                this.controls.minPolarAngle = -1 * degToRad(left)
+            }
+        }
+        if (axis === "horizontal") {
+            if (left >= 180 && right >= 180) {
+                this.controls.maxAzimuthAngle = Infinity
+                this.controls.minAzimuthAngle = Infinity
+            }
+            else {
+                this.controls.maxAzimuthAngle = degToRad(right)
+                this.controls.minAzimuthAngle = -1 * degToRad(left)
+            }
+        }
     }
 
     setParameters(params) {
@@ -93,6 +118,12 @@ export default class Camera {
         })
         this.debugFolder.addBinding(this.params, 'canRotate', { label: 'Can rotate' }).on('change', () => {
             this.controls.enableRotate = this.params.canRotate
+        })
+        this.debugFolder.addBinding(this.params, 'orbitHorizontal', { label: 'Horizontal orbit', min: 0, max: 180 }).on('change', (e) => {
+            this.setOrbitLimits("horizontal", e.value.x, e.value.y)
+        })
+        this.debugFolder.addBinding(this.params, 'orbitVertical', { label: 'Vertical orbit', min: 0, max: 180 }).on('change', (e) => {
+            //this.setOrbitLimits("vertical", e.value.x, e.value.y)
         })
         this.debugFolder.addBinding(this.params, 'autoRotate', { label: 'Auto rotate' }).on('change', () => {
             this.controls.autoRotate = this.params.autoRotate
