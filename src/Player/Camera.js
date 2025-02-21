@@ -33,13 +33,13 @@ export default class Camera {
         this.controls.target.set(this.params.target.x, this.params.target.y, this.params.target.z)
         this.controls.enableRotate = this.params.canRotate
         this.controls.autoRotate = this.params.autoRotate
+        this.controls.rotateSpeed = this.params.sensitivity
+        this.setOrbitLimits("horizontal", this.params.orbitHorizontal.x, this.params.orbitHorizontal.y)
+        this.setOrbitLimits("vertical", this.params.orbitVertical.x, this.params.orbitVertical.y)
         this.controls.autoRotateSpeed = this.params.autoRotateSpeed
         this.controls.enableZoom = this.params.canZoom
         this.controls.enableDamping = true
-
-        // Vertical constraints
-        this.controls.minPolarAngle = Math.PI / 9
-        this.controls.maxPolarAngle = Math.PI - (Math.PI / 9)
+        this.controls.enablePan = false
     }
 
     resize() {
@@ -52,16 +52,9 @@ export default class Camera {
     }
 
     setOrbitLimits(axis, left, right) {
-        // To fix
         if (axis === "vertical") {
-            if (left >= 180 && right >= 180) {
-                this.controls.maxPolarAngle = Infinity
-                this.controls.minPolarAngle = Infinity
-            }
-            else {
-                this.controls.maxPolarAngle = degToRad(right)
-                this.controls.minPolarAngle = -1 * degToRad(left)
-            }
+            this.controls.minPolarAngle = degToRad(left)
+            this.controls.maxPolarAngle = degToRad(right)
         }
         if (axis === "horizontal") {
             if (left >= 180 && right >= 180) {
@@ -84,6 +77,9 @@ export default class Camera {
         // Set OrbitControls parameters
         this.controls.target.set(params.target.x, params.target.y, params.target.z)
         this.controls.enableRotate = params.canRotate
+        this.controls.rotateSpeed = params.sensitivity
+        this.setOrbitLimits("horizontal", params.orbitHorizontal.x, params.orbitHorizontal.y)
+        this.setOrbitLimits("vertical", params.orbitVertical.x, params.orbitVertical.y)
         this.controls.autoRotate = params.autoRotate
         this.controls.autoRotateSpeed = params.autoRotateSpeed
         this.controls.enableZoom = params.canZoom
@@ -119,11 +115,14 @@ export default class Camera {
         this.debugFolder.addBinding(this.params, 'canRotate', { label: 'Can rotate' }).on('change', () => {
             this.controls.enableRotate = this.params.canRotate
         })
+        this.debugFolder.addBinding(this.params, 'sensitivity', { label: 'Sensitivity', min: 0.25, max: 1.5, step: 0.05 }).on('change', () => {
+            this.controls.rotateSpeed = this.params.sensitivity
+        })
         this.debugFolder.addBinding(this.params, 'orbitHorizontal', { label: 'Horizontal orbit', min: 0, max: 180 }).on('change', (e) => {
             this.setOrbitLimits("horizontal", e.value.x, e.value.y)
         })
         this.debugFolder.addBinding(this.params, 'orbitVertical', { label: 'Vertical orbit', min: 0, max: 180 }).on('change', (e) => {
-            //this.setOrbitLimits("vertical", e.value.x, e.value.y)
+            this.setOrbitLimits("vertical", e.value.x, e.value.y)
         })
         this.debugFolder.addBinding(this.params, 'autoRotate', { label: 'Auto rotate' }).on('change', () => {
             this.controls.autoRotate = this.params.autoRotate

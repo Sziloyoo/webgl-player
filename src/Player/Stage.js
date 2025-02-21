@@ -5,12 +5,14 @@ import Model from "./Model.js"
 import Title from './Utils/Title.js'
 
 export default class Stage {
-    constructor(params) {
+    constructor(params, text) {
         this.player = new Player()
         this.scene = this.player.scene
         this.loader = this.player.loader
         this.debug = this.player.debug
         this.params = params
+
+        if(text) this.labels = new Map(Object.entries(text.labels))
 
         // Place lights into the scene
         this.lighting = new Lighting(this.params.lighting)
@@ -45,7 +47,8 @@ export default class Stage {
         const textObjects = glTF.scene.children.find(obj => obj.name === "text").children
 
         for (const { name, position } of textObjects) {
-            const text = new Title(name, position)
+            const labelText = this.labels ? this.labels.get(name) : "string not found"
+            const text = new Title(labelText, position)
             text.setStyle(this.params.text)
             this.scene.add(text.label)
 
@@ -73,6 +76,7 @@ export default class Stage {
         this.params = { ...params }
         if (this.fallbackObject) this.scene.remove(this.fallbackObject)
         if (this.lighting) this.lighting.setParameters(this.params.lighting)
+        if (this.textContainer) this.textContainer.forEach(text => text.setStyle(this.params.text))
     }
 
     fallback() {

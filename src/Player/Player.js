@@ -11,7 +11,7 @@ import Stage from './Stage.js'
 let instance = null
 
 export default class Player {
-    constructor(container, canvas, config = Player.getFallback()) {
+    constructor(container, canvas, config = Player.getFallback(), text) {
         // Singelton
         if (instance) return instance
         instance = this
@@ -30,7 +30,7 @@ export default class Player {
         this.loader = new Loader(config.source)
         this.camera = new Camera(config.camera)
         this.renderer = new Renderer(config.renderer)
-        this.stage = new Stage(config)
+        this.stage = new Stage(config, text)
 
         // Resize event
         this.sizes.on('resize', () => {
