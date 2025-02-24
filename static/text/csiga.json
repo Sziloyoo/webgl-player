@@ -1,0 +1,43 @@
+{
+    "source": {
+        "name": "elefant",
+        "type": "gltfModel",
+        "path": "./models/csiga.glb"
+    },
+    "camera": {
+        "fov": 35,
+        "position": { "x": -0.5, "y": 0.25, "z": 3 },
+        "target": { "x": -0.5, "y": 0.25, "z": 0 },
+        "canZoom": false,
+        "canRotate": true,
+        "sensitivity": 0.5,
+        "orbitHorizontal": { "x": 180, "y": 180 },
+        "orbitVertical": { "x": 30, "y": 90 },
+        "autoRotate": false,
+        "autoRotateSpeed": 2.0
+    },
+    "renderer": {
+        "toneMapping": "Linear",
+        "toneMappingExposure": 1.75,
+        "alpha": true,
+        "background": "#a59858"
+    },
+    "lighting": {
+        "directionalLightColor": "#ffffff",
+        "directionalLightIntensity": 1.0,
+        "ambientLightColor": "#ffffff",
+        "ambientLightIntensity": 1.0
+    },
+    "model": {
+        "playAnimation": true,
+        "animationSpeed": 1.0
+    },
+    "text": {
+        "fontColor": "#ffffff",
+        "fontSize": 0.5,
+        "fontBold": true,
+        "fontStroke": true,
+        "lineColor": "#ffffff",
+        "lineWidth": 0.1
+    }
+}

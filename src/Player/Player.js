@@ -11,7 +11,7 @@ import Stage from './Stage.js'
 let instance = null
 
 export default class Player {
-    constructor(container, canvas, config = Player.getFallback()) {
+    constructor(container, canvas, config = Player.getFallback(), text) {
         // Singelton
         if (instance) return instance
         instance = this
@@ -30,7 +30,7 @@ export default class Player {
         this.loader = new Loader(config.source)
         this.camera = new Camera(config.camera)
         this.renderer = new Renderer(config.renderer)
-        this.stage = new Stage(config)
+        this.stage = new Stage(config, text)
 
         // Resize event
         this.sizes.on('resize', () => {
@@ -41,12 +41,6 @@ export default class Player {
         this.time.on('tick', () => {
             this.update()
         })
-
-        // Debug mode
-        /* if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder({ title: "Player" })
-            this.debugFolder.addButton({ title: "Function" }).on('click', () => console.log("defun"))
-        } */
     }
 
     resize() {
@@ -61,7 +55,7 @@ export default class Player {
     }
 
     load(config) {
-        if(this.debug.active) this.debug.load(config.source)
+        if (this.debug.active) this.debug.load(config.source)
         this.loader.startLoading(config.source)
         this.camera.setParameters(config.camera)
         this.renderer.setParameters(config.renderer)
@@ -86,7 +80,7 @@ export default class Player {
                 toneMapping: "Linear",
                 toneMappingExposure: 1.0,
                 alpha: false,
-                background: "#222222"
+                background: "#888888"
             },
             lighting: {
                 directionalLightColor: "#ffffff",
@@ -97,6 +91,14 @@ export default class Player {
             model: {
                 playAnimation: false,
                 animationSpeed: 1.0
+            },
+            text: {
+                fontColor: "#ffffff",
+                fontSize: 0.5,
+                fontBold: true,
+                fontStroke: true,
+                lineColor: "#ffffff",
+                lineWidth: 0.1
             }
         }
     }
