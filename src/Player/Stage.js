@@ -7,6 +7,7 @@ import Title from './Utils/Title.js'
 export default class Stage {
     constructor(params, text) {
         this.player = new Player()
+        this.controls = this.player.controls
         this.scene = this.player.scene
         this.loader = this.player.loader
         this.debug = this.player.debug
@@ -39,14 +40,28 @@ export default class Stage {
     }
 
     createTexts(modelName) {
+        // Check if text file has labels
+        if(!this.labels || this.labels.size == 0){
+            console.warn("Can't find labels in text file.")
+            return
+        }
+
+        // Get text IDs and Positions from glTF file
+        const glTF = this.loader.items[modelName]
+
+        // Check if model has label positions
+        if(!glTF.scene.children.find(obj => obj.name === "text")){
+            console.warn("Can't find text positions in glTF file.")
+            return
+        }
+
         // Create set for the texts
         this.textContainer = new Set()
 
-        // Get text IDs and Positions from glTF file and generate Labels
-        const glTF = this.loader.items[modelName]
         const textObjects = glTF.scene.children.find(obj => obj.name === "text").children
 
         for (const { name, position } of textObjects) {
+
             const labelText = this.labels ? this.labels.get(name) : "string not found"
             const text = new Title(labelText, position)
             text.setStyle(this.params.text)
