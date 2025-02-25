@@ -99,7 +99,7 @@ With the debug menu, all parameters can be tweaked using a Tweakpane UI.
 
 ## Examples:
 
-### sziv
+### csiga
 
 ```
 https://test-files.vercel.app/csiga/csiga.json
@@ -111,13 +111,13 @@ https://test-files.vercel.app/csiga/csiga.json
 https://test-files.vercel.app/elefant/elefant.json
 ```
 
-### sisak
+### sziv
 
 ```
 https://test-files.vercel.app/sziv/sziv.json
 ```
 
-### roka
+### sisak
 
 ```
 https://test-files.vercel.app/sisak/sisak.json
