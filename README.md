@@ -1,10 +1,3 @@
-# WebGL Player
-
-```
-npm install
-npm run dev
-```
-
 # Setup the Player
 A player object has four parameters:
 - canvas container (div)
@@ -79,7 +72,7 @@ When the JSON file fail to fetch, the application will use a fallback configurat
 ```
 
 # Displaying text
-Text position are loaded from the glTF file. In the glTF root a `text` object contains all label positons.
+Text position are loaded from the glTF file. In the glTF root, a `text` object contains all label positons.
 When loading the scene, 3D labels are generated to the given positions.
 
 ```
