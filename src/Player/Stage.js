@@ -3,6 +3,7 @@ import Lighting from "./Lighting.js"
 import Player from "./Player.js"
 import Model from "./Model.js"
 import Title from './Utils/Title.js'
+import Marker from './Utils/Line.js'
 
 export default class Stage {
     constructor(params, text) {
@@ -26,6 +27,9 @@ export default class Stage {
             this.model = new Model(this.params)
             if(this.params.text) this.createTexts(this.params.source.name)
         })
+
+        this.marker = new Marker(new THREE.Vector3(1, 0, 1), new THREE.Vector3(1, 1, 1), new THREE.Color("#ffffff"))
+        this.scene.add(this.marker.GO)
 
         // Debug mode for Texts
         if (this.debug.active && this.params.text) {

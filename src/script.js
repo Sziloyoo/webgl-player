@@ -10,7 +10,7 @@ const config = await loadConfiguration("https://test-files.vercel.app/csiga/csig
 // Text file
 const text = await loadConfiguration("https://test-files.vercel.app/csiga/text/csiga_hu.json")
 
-const player = new Player(container, canvas, config, text)
+const player = new Player(container, canvas, undefined)
 
 async function loadConfiguration(url) {
     let data = undefined

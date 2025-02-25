@@ -73,6 +73,9 @@ export default class Player {
                 target: { x: 0, y: 0, z: 0 },
                 canZoom: false,
                 canRotate: true,
+                sensitivity: 0.5,
+                orbitHorizontal: { x: 180, y: 180 },
+                orbitVertical: { x: 20, y: 160 },
                 autoRotate: false,
                 autoRotateSpeed: 2.0
             },
@@ -80,7 +83,7 @@ export default class Player {
                 toneMapping: "Linear",
                 toneMappingExposure: 1.0,
                 alpha: false,
-                background: "#888888"
+                background: "#666666"
             },
             lighting: {
                 directionalLightColor: "#ffffff",
