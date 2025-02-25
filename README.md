@@ -6,17 +6,26 @@ npm run dev
 ```
 
 # Setup the Player
-A player object has three parameters:
+A player object has four parameters:
 - canvas container (div)
 - HTML canvas
 - configuration file (a JSON file, with the required values as seen in the example below)
+- a text file, where labels translated to a given language
 
 ```js
-const config = await loadConfiguration("https://test-files.vercel.app/elefant.json")
-const container = document.querySelector('.canvas-container')
-const canvas = document.querySelector('canvas.webgl')
+import Player from "./Player/Player.js"
 
-const player = new Player(container, canvas, config)
+// HTML elements
+const container = document.getElementById("container")
+const canvas = document.getElementById("canvas")
+
+// Config file
+const config = await loadConfiguration("https://test-files.vercel.app/csiga/csiga.json")
+
+// Text file
+const text = await loadConfiguration("https://test-files.vercel.app/csiga/text/csiga_hu.json")
+
+const player = new Player(container, canvas, config, text)
 ```
 
 When the JSON file fail to fetch, the application will use a fallback configuration.
@@ -26,24 +35,27 @@ When the JSON file fail to fetch, the application will use a fallback configurat
 ```JSON
 {
     "source": {
-        "name": "sziv",
+        "name": "csiga",
         "type": "gltfModel",
-        "path": "https://test-files.vercel.app/sziv.glb"
+        "path": "https://test-files.vercel.app/csiga/csiga.glb"
     },
     "camera": {
         "fov": 35,
-        "position": { "x": 0, "y": 20, "z": 32 },
-        "target": { "x": 0, "y": 9.5, "z": 0 },
+        "position": { "x": 0.2, "y": 0.4, "z": 3 },
+        "target": { "x": 0.2, "y": 0.4, "z": 0 },
         "canZoom": false,
         "canRotate": true,
-        "autoRotate": true,
+        "sensitivity": 0.5,
+        "orbitHorizontal": { "x": 180, "y": 180 },
+        "orbitVertical": { "x": 30, "y": 90 },
+        "autoRotate": false,
         "autoRotateSpeed": 2.0
     },
     "renderer": {
-        "toneMapping": "ACESFilmic",
-        "toneMappingExposure": 1.75,
+        "toneMapping": "Linear",
+        "toneMappingExposure": 1.5,
         "alpha": true,
-        "background": "#222222"
+        "background": "#a59858"
     },
     "lighting": {
         "directionalLightColor": "#ffffff",
@@ -54,6 +66,35 @@ When the JSON file fail to fetch, the application will use a fallback configurat
     "model": {
         "playAnimation": true,
         "animationSpeed": 1.0
+    },
+    "text": {
+        "fontColor": "#c3b883",
+        "fontSize": 0.1,
+        "fontBold": true,
+        "fontStroke": true,
+        "lineColor": "#ffffff",
+        "lineWidth": 0.1
+    }
+}
+```
+
+# Displaying text
+Text position are loaded from the glTF file. In the glTF root a `text` object contains all label positons.
+When loading the scene, 3D labels are generated to the given positions.
+
+```
+glTF file => IDs, positions
+text file => IDs, translated labels
+```
+
+Example of a text file `csiga_hu.json`:
+```JSON
+{
+    "labels": {
+        "haslab": "hasláb",
+        "haziko": "ház",
+        "szemek": "szemek",
+        "tapogatok": "tapogatók"
     }
 }
 ```
@@ -68,23 +109,23 @@ With the debug menu, all parameters can be tweaked using a Tweakpane UI.
 ### sziv
 
 ```
-https://test-files.vercel.app/sziv.json
+https://test-files.vercel.app/csiga/csiga.json
 ```
 
 ### elefant
 
 ```
-https://test-files.vercel.app/elefant.json
+https://test-files.vercel.app/elefant/elefant.json
 ```
 
 ### sisak
 
 ```
-https://test-files.vercel.app/sisak.json
+https://test-files.vercel.app/sziv/sziv.json
 ```
 
 ### roka
 
 ```
-https://test-files.vercel.app/roka.json
+https://test-files.vercel.app/sisak/sisak.json
 ```
