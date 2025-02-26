@@ -5,41 +5,55 @@ export default class Marker {
         this.startPosition = startPosition
         this.endPosition = endPosition
         this.color = color
-        this.lineWidth = 1.0
 
-        this.GO = this.createMarker(this.startPosition, this.endPosition, this.color)
+        this.geometry = this.createGeometry()
+        this.material = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, color: this.color })
+        this.GO = new THREE.Line(this.geometry, this.material)
     }
 
-    update() {
+    createGeometry() {
+        const geometry = new THREE.BufferGeometry()
 
-    }
-
-    createMarker(start, end, color) {
-
-        // Create geometry
-        const geometry = new THREE.BufferGeometry();
-
-        // Define the two points
         const positions = new Float32Array([
-            start.x, start.y, start.z,  // Start point (fully visible)
-            end.x, end.y, end.z   // End point (transparent)
-        ]);
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            this.startPosition.x, this.startPosition.y, this.startPosition.z,
+            this.endPosition.x, this.endPosition.y, this.endPosition.z
+        ])
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
 
         // Define colors with alpha (RGBA)
         const colors = new Float32Array([
-            color.r, color.g, color.b, 1.0,
-            color.r, color.g, color.b, 0.0
-        ]);
-        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 4));
+            1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 0.0
+        ])
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 4))
 
-        // Create material
-        const material = new THREE.LineBasicMaterial({
-            vertexColors: true,
-            transparent: true
-        });
+        return geometry
+    }
 
-        // Create line
-        return new THREE.Line(geometry, material);
+    redraw() {
+        if(!this.GO) return
+
+        const positions = this.geometry.attributes.position.array
+        positions[0] = this.startPosition.x
+        positions[1] = this.startPosition.y
+        positions[2] = this.startPosition.z 
+        positions[3] = this.endPosition.x 
+        positions[4] = this.endPosition.y
+        positions[5] = this.endPosition.z
+        this.geometry.attributes.position.needsUpdate = true
+
+        // Update color
+        this.material.color.set(this.color)
+    }
+
+    setColor(color) {
+        this.color = color
+        this.redraw()
+    }
+
+    setPositions(start, end){
+        this.startPosition = start
+        this.endPosition = end
+        this.redraw()
     }
 }

@@ -2,19 +2,18 @@ import * as THREE from 'three'
 import Lighting from "./Lighting.js"
 import Player from "./Player.js"
 import Model from "./Model.js"
-import Title from './Utils/Title.js'
-import Marker from './Utils/Line.js'
+import Content from './Content.js'
 
 export default class Stage {
-    constructor(params, text) {
+    constructor(params, texts) {
         this.player = new Player()
         this.controls = this.player.controls
+        this.camera = this.player.camera
         this.scene = this.player.scene
         this.loader = this.player.loader
         this.debug = this.player.debug
         this.params = params
-
-        if(text) this.labels = new Map(Object.entries(text.labels))
+        this.texts = texts
 
         // Place lights into the scene
         this.lighting = new Lighting(this.params.lighting)
@@ -24,12 +23,9 @@ export default class Stage {
 
         // Wait for resources and create model
         this.loader.on('ready', () => {
-            this.model = new Model(this.params)
-            if(this.params.text) this.createTexts(this.params.source.name)
+            this.model = new Model(this.params, this.scene)
+            this.content = new Content(this.params, this.texts)
         })
-
-        this.marker = new Marker(new THREE.Vector3(1, 0, 1), new THREE.Vector3(1, 1, 1), new THREE.Color("#ffffff"))
-        this.scene.add(this.marker.GO)
 
         // Debug mode for Texts
         if (this.debug.active && this.params.text) {
@@ -40,40 +36,7 @@ export default class Stage {
 
     update() {
         this.model?.update()
-        this.textContainer?.forEach(text => text.update(this.player.camera.instance))
-    }
-
-    createTexts(modelName) {
-        // Check if text file has labels
-        if(!this.labels || this.labels.size == 0){
-            console.warn("Can't find labels in text file.")
-            return
-        }
-
-        // Get text IDs and Positions from glTF file
-        const glTF = this.loader.items[modelName]
-
-        // Check if model has label positions
-        if(!glTF.scene.children.find(obj => obj.name === "text")){
-            console.warn("Can't find text positions in glTF file.")
-            return
-        }
-
-        // Create set for the texts
-        this.textContainer = new Set()
-
-        const textObjects = glTF.scene.children.find(obj => obj.name === "text").children
-
-        for (const { name, position } of textObjects) {
-
-            const labelText = this.labels ? this.labels.get(name) : "string not found"
-            const text = new Title(labelText, position)
-            text.setStyle(this.params.text)
-            this.scene.add(text.label)
-
-            // Put text into the map
-            this.textContainer.add(text)
-        }
+        this.content?.update()
     }
 
     createTextsDebug() {

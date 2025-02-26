@@ -5,12 +5,12 @@ const container = document.getElementById("container")
 const canvas = document.getElementById("canvas")
 
 // Config file
-const config = await loadConfiguration("https://test-files.vercel.app/csiga/csiga.json")
+const config = await loadConfiguration("./test.json")
 
 // Text file
-const text = await loadConfiguration("https://test-files.vercel.app/csiga/text/csiga_hu.json")
+const text = await loadConfiguration("./text.json")
 
-const player = new Player(container, canvas, undefined)
+const player = new Player(container, canvas, config, text)
 
 async function loadConfiguration(url) {
     let data = undefined

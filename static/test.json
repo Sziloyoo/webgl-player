@@ -1,0 +1,74 @@
+{
+    "source": {
+        "name": "csiga",
+        "type": "gltfModel",
+        "path": "https://test-files.vercel.app/csiga/csiga.glb"
+    },
+    "camera": {
+        "fov": 35,
+        "position": { "x": 0.2, "y": 0.4, "z": 3 },
+        "target": { "x": 0.2, "y": 0.4, "z": 0 },
+        "canZoom": false,
+        "canRotate": true,
+        "sensitivity": 0.5,
+        "orbitHorizontal": { "x": 180, "y": 180 },
+        "orbitVertical": { "x": 30, "y": 90 },
+        "autoRotate": false,
+        "autoRotateSpeed": 2.0
+    },
+    "renderer": {
+        "toneMapping": "Linear",
+        "toneMappingExposure": 1.5,
+        "alpha": false,
+        "background": "#222222"
+    },
+    "lighting": {
+        "directionalLightColor": "#ffffff",
+        "directionalLightIntensity": 1.0,
+        "ambientLightColor": "#ffffff",
+        "ambientLightIntensity": 1.0
+    },
+    "model": {
+        "playAnimation": true,
+        "animationSpeed": 1.0
+    },
+    "styles": {
+        "fontColor": "#ffffff",
+        "fontSize": 0.1,
+        "fontBold": true,
+        "fontStroke": true,
+        "lineColor": "#ffffff"
+    },
+    "labels": {
+        "text_01": {
+            "position": { "x": -1.0, "y": 1.0, "z": 1.0 },
+            "color": "#ff0000"
+        },
+        "text_02": {
+            "position": { "x": 1.0, "y": 1.0, "z": 1.0 },
+            "color": "#00ff00"
+        },
+        "text_03": {
+            "position": { "x": 1.0, "y": 1.0, "z": -1.0 },
+            "color": "#0000ff"
+        }
+    },
+    "markers": {
+        "marker_01": {
+            "position": { "x": -1.0, "y": 0.0, "z": 1.0 },
+            "label": "text_01"
+        },
+        "marker_02": {
+            "position": { "x": 1.0, "y": 0.0, "z": 1.0 },
+            "label": "text_02"
+        },
+        "marker_03": {
+            "position": { "x": 1.0, "y": 0.0, "z": -1.0 },
+            "label": "text_03"
+        },
+        "marker_04": {
+            "position": { "x": 0.0, "y": 0.0, "z": 0.0 },
+            "label": "text_03"
+        }
+    }
+}

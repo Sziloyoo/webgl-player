@@ -95,13 +95,12 @@ export default class Player {
                 playAnimation: false,
                 animationSpeed: 1.0
             },
-            text: {
+            style: {
                 fontColor: "#ffffff",
                 fontSize: 0.5,
                 fontBold: true,
                 fontStroke: true,
-                lineColor: "#ffffff",
-                lineWidth: 0.1
+                lineColor: "#ffffff"
             }
         }
     }
