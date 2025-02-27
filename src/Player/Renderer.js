@@ -17,7 +17,7 @@ export default class Renderer {
         this.setInstance()
 
         if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder({ title: "Renderer" })
+            this.debugFolder = this.debug.ui.addFolder({ title: "Renderer", expanded: false })
             this.createDebugSettings()
         }
     }

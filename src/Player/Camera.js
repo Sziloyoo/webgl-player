@@ -17,7 +17,7 @@ export default class Camera {
         this.setControls()
 
         if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder({ title: "Camera" })
+            this.debugFolder = this.debug.ui.addFolder({ title: "Camera", expanded: false })
             this.createDebugSettings()
         }
     }
@@ -93,7 +93,7 @@ export default class Camera {
             if (this.debugFolder) this.debugFolder.dispose()
 
             // Create new folder and bindings
-            this.debugFolder = this.debug.ui.addFolder({ index: 1, title: "Camera" })
+            this.debugFolder = this.debug.ui.addFolder({ title: "Camera", expanded: false })
             this.createDebugSettings()
         }
     }

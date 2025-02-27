@@ -13,7 +13,7 @@ export default class Lighting {
         this.ambientLight = this.createAmbientLight()
 
         if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder({ title: "Lighting" })
+            this.debugFolder = this.debug.ui.addFolder({ title: "Lighting", expanded: false })
             this.createDebugSettings()
         }
     }

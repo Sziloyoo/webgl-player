@@ -1,14 +1,24 @@
 import * as THREE from 'three'
 
 export default class Marker {
-    constructor(startPosition, endPosition, color) {
+    constructor(startPosition, endPosition, color, id, debug) {
         this.startPosition = startPosition
         this.endPosition = endPosition
         this.color = color
+        this.id = id
+
+        this.settings = {
+            position: { x: this.startPosition.x, y: this.startPosition.y, z: this.startPosition.z }
+        }
 
         this.geometry = this.createGeometry()
         this.material = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, color: this.color })
         this.GO = new THREE.Line(this.geometry, this.material)
+
+        if (debug.active) {
+            this.debugFolder = debug.ui.addFolder({ title: this.id })
+            this.createDebugSettings()
+        }
     }
 
     createGeometry() {
@@ -31,13 +41,13 @@ export default class Marker {
     }
 
     redraw() {
-        if(!this.GO) return
+        if (!this.GO) return
 
         const positions = this.geometry.attributes.position.array
         positions[0] = this.startPosition.x
         positions[1] = this.startPosition.y
-        positions[2] = this.startPosition.z 
-        positions[3] = this.endPosition.x 
+        positions[2] = this.startPosition.z
+        positions[3] = this.endPosition.x
         positions[4] = this.endPosition.y
         positions[5] = this.endPosition.z
         this.geometry.attributes.position.needsUpdate = true
@@ -51,9 +61,16 @@ export default class Marker {
         this.redraw()
     }
 
-    setPositions(start, end){
+    setPositions(start, end) {
         this.startPosition = start
         this.endPosition = end
         this.redraw()
+    }
+
+    createDebugSettings() {
+        this.debugFolder.addBinding(this.settings, 'position', { label: 'position' }).on('change', () => {
+            this.startPosition.set(this.settings.position.x, this.settings.position.y, this.settings.position.z)
+            this.redraw()
+        })
     }
 }

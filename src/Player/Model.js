@@ -15,7 +15,7 @@ export default class Model {
         this.displayModel()
 
         if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder({ title: "Model" })
+            this.debugFolder = this.debug.ui.addFolder({ title: "Model", expanded: false })
             this.createDebugSettings()
         }
     }

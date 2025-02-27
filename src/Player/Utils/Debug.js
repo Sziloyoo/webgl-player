@@ -5,7 +5,7 @@ export default class Debug {
         this.active = window.location.hash === '#debug'
         if (this.active) {
             this.ui = new Pane()
-            this.debugFolder = this.ui.addFolder({ title: "Informations" })
+            this.debugFolder = this.ui.addFolder({ title: "Informations", expanded: false })
             this.debugFolder.addBinding(source, 'name', { title: "Model name", disabled: true })
 
             // If there is no model provided, exit
