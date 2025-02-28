@@ -2,17 +2,17 @@ import * as THREE from "three"
 import Player from "./Player.js"
 
 export default class Model {
-    constructor(params) {
+    constructor(params, parent) {
         this.player = new Player()
         this.loader = this.player.loader
         this.time = this.player.time
-        this.scene = this.player.scene
         this.debug = this.player.debug
-
+        
+        this.parent = parent
         this.params = params
 
         this.initModel(this.params.source.name)
-        this.displayModel()
+        this.displayModel(this.parent)
 
         if (this.debug.active) {
             this.debugFolder = this.debug.ui.addFolder({ title: "Model", expanded: false })
@@ -30,7 +30,7 @@ export default class Model {
 
     displayModel() {
         // Add loaded model to the scene
-        if (this.modelGLTF) this.scene.add(this.modelGLTF.scene)
+        if (this.modelGLTF) this.parent.add(this.modelGLTF.scene)
         else console.error("There is no reference for the GLTF file.")
 
         // Playing animation if there is one

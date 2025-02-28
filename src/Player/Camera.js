@@ -17,20 +17,20 @@ export default class Camera {
         this.setControls()
 
         if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder({ title: "Camera", expanded: false })
+            this.debugFolder = this.debug.ui.addFolder({ title: "Camera", expanded: true })
             this.createDebugSettings()
         }
     }
 
     setInstance() {
         this.instance = new THREE.PerspectiveCamera(this.params.fov, this.sizes.width / this.sizes.height, 0.5, 500)
-        this.instance.position.set(this.params.position.x, this.params.position.y, this.params.position.z)
+        this.instance.position.set(this.params.offset.x, this.params.height, this.params.distance + this.params.offset.y)
         this.scene.add(this.instance)
     }
 
     setControls() {
         this.controls = new OrbitControls(this.instance, this.canvas)
-        this.controls.target.set(this.params.target.x, this.params.target.y, this.params.target.z)
+        this.controls.target.set(this.params.offset.x, this.params.height, this.params.offset.y)
         this.controls.enableRotate = this.params.canRotate
         this.controls.autoRotate = this.params.autoRotate
         this.controls.rotateSpeed = this.params.sensitivity
@@ -38,6 +38,9 @@ export default class Camera {
         this.setOrbitLimits("vertical", this.params.orbitVertical.x, this.params.orbitVertical.y)
         this.controls.autoRotateSpeed = this.params.autoRotateSpeed
         this.controls.enableZoom = this.params.canZoom
+        this.controls.zoomSpeed = this.params.zoomSpeed
+        this.controls.minDistance = this.params.zoomMin
+        this.controls.maxDistance = this.params.zoomMax
         this.controls.enableDamping = true
         this.controls.enablePan = false
     }
@@ -62,8 +65,8 @@ export default class Camera {
                 this.controls.minAzimuthAngle = Infinity
             }
             else {
-                this.controls.maxAzimuthAngle = degToRad(right)
                 this.controls.minAzimuthAngle = -1 * degToRad(left)
+                this.controls.maxAzimuthAngle = degToRad(right)
             }
         }
     }
@@ -103,14 +106,25 @@ export default class Camera {
             this.instance.fov = this.params.fov
             this.instance.updateProjectionMatrix()
         })
-        this.debugFolder.addBinding(this.params, 'position', { label: 'Position', step: 0.1 }).on('change', () => {
-            this.instance.position.set(this.params.position.x, this.params.position.y, this.params.position.z)
+        this.debugFolder.addBinding(this.params, 'height', { label: 'Height', min: 0.0, max: 32.0, step: 0.1 }).on('change', () => {
+            this.instance.position.set(this.params.offset.x, this.params.height, this.params.distance + this.params.offset.y)
+            this.controls.target.set(this.params.offset.x, this.params.height, this.params.offset.y)
         })
-        this.debugFolder.addBinding(this.params, 'target', { label: 'Target', step: 0.1 }).on('change', () => {
-            this.controls.target.set(this.params.target.x, this.params.target.y, this.params.target.z)
+        this.debugFolder.addBinding(this.params, 'distance', { label: 'Distance', min: 2.0, max: 32.0, step: 0.1 }).on('change', () => {
+            this.instance.position.set(this.params.offset.x, this.params.height, this.params.distance + this.params.offset.y)
+        })
+        this.debugFolder.addBinding(this.params, 'offset', { label: 'Offset', min: -16.0, max: 16.0, step: 0.1 }).on('change', () => {
+            this.instance.position.set(this.params.offset.x, this.params.height, this.params.distance + this.params.offset.y)
+            this.controls.target.set(this.params.offset.x, this.params.height, this.params.offset.y)
         })
         this.debugFolder.addBinding(this.params, 'canZoom', { label: 'Can zoom' }).on('change', () => {
             this.controls.enableZoom = this.params.canZoom
+        })
+        this.debugFolder.addBinding(this.params, 'zoomMin', { label: 'Zoom min', min: 0.5, max: 60.0, step: 0.1 }).on('change', () => {
+            this.controls.minDistance = this.params.zoomMin
+        })
+        this.debugFolder.addBinding(this.params, 'zoomMax', { label: 'Zoom max', min: 1.0, max: 64.0, step: 0.1 }).on('change', () => {
+            this.controls.maxDistance = this.params.zoomMax
         })
         this.debugFolder.addBinding(this.params, 'canRotate', { label: 'Can rotate' }).on('change', () => {
             this.controls.enableRotate = this.params.canRotate

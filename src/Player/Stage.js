@@ -12,8 +12,11 @@ export default class Stage {
         this.scene = this.player.scene
         this.loader = this.player.loader
         this.debug = this.player.debug
+
         this.params = params
         this.texts = texts
+
+        this.GO = new THREE.Group()
 
         // Place lights into the scene
         this.lighting = new Lighting(this.params.lighting)
@@ -23,35 +26,16 @@ export default class Stage {
 
         // Wait for resources and create model
         this.loader.on('ready', () => {
-            this.model = new Model(this.params, this.scene)
+            this.model = new Model(this.params, this.GO)
             this.content = new Content(this.params, this.texts)
         })
 
-        // Debug mode for Texts
-        if (this.debug.active && this.params.text) {
-            this.debugTextFolder = this.debug.ui.addFolder({ title: "Text" })
-            this.createTextsDebug()
-        }
+        this.scene.add(this.GO)
     }
 
     update() {
         this.model?.update()
         this.content?.update()
-    }
-
-    createTextsDebug() {
-        this.debugTextFolder.addBinding(this.params.text, 'fontSize', { label: 'Font size', min: 0.1, max: 1.0, step: 0.05 }).on('change', () => {
-            this.textContainer?.forEach(text => text.setStyle(this.params.text))
-        })
-        this.debugTextFolder.addBinding(this.params.text, 'fontColor', { label: 'Font color' }).on('change', () => {
-            this.textContainer?.forEach(text => text.setStyle(this.params.text))
-        })
-        this.debugTextFolder.addBinding(this.params.text, 'fontBold', { label: 'Font bold' }).on('change', () => {
-            this.textContainer?.forEach(text => text.setStyle(this.params.text))
-        })
-        this.debugTextFolder.addBinding(this.params.text, 'fontStroke', { label: 'Font stroke' }).on('change', () => {
-            this.textContainer?.forEach(text => text.setStyle(this.params.text))
-        })
     }
 
     setParameters(params) {

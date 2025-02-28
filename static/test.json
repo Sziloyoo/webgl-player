@@ -6,9 +6,13 @@
     },
     "camera": {
         "fov": 35,
-        "position": { "x": 0.2, "y": 0.4, "z": 5 },
-        "target": { "x": 0.2, "y": 0.4, "z": 0 },
+        "height": 0.4,
+        "distance": 5.0,
+        "offset": { "x": 0.2, "y": 0 },
         "canZoom": false,
+        "zoomSpeed": 1.0,
+        "zoomMin": 2.0,
+        "zoomMax": 4.0,
         "canRotate": true,
         "sensitivity": 0.5,
         "orbitHorizontal": { "x": 180, "y": 180 },
@@ -30,7 +34,8 @@
     },
     "model": {
         "playAnimation": true,
-        "animationSpeed": 1.0
+        "animationSpeed": 1.0,
+        "orientation": 0.0
     },
     "styles": {
         "fontColor": "#a1aa00",
@@ -52,7 +57,7 @@
             "color": "#ff00ed"
         },
         "text_04": {
-            "position": { "x": 0.0, "y": 1.0, "z": -2.0 }
+            "position": { "x": -1.0, "y": 1.0, "z": -1.0 }
         }
     },
     "markers": {
@@ -73,7 +78,7 @@
             "label": "text_03"
         },
         "marker_05": {
-            "position": { "x": 0.0, "y": 0.0, "z": 0.0 },
+            "position": { "x": -1.0, "y": 0.0, "z": -0.5 },
             "label": "text_04"
         }
     }
