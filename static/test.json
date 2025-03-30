@@ -2,7 +2,7 @@
     "source": {
         "name": "csiga",
         "type": "gltfModel",
-        "path": "https://test-files.vercel.app/csiga/csiga.glb"
+        "path": "./models/camera.glb"
     },
     "camera": {
         "fov": 35,
