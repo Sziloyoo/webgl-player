@@ -3,7 +3,7 @@
 ![Local GIF](./demo/camera-demo.gif)
 
 # Live:
-[https://jak-and-daxter-fishing-game.vercel.app/](https://webgl-player-one.vercel.app/)
+[webgl-player-web-app](https://webgl-player-one.vercel.app/)
 
 # Setup the Player
 A player object has four parameters:
