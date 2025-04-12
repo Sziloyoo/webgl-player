@@ -1,3 +1,7 @@
+# 3D model player for webpages
+
+![Local GIF](./demo/camera-demo.gif)
+
 # Setup the Player
 A player object has four parameters:
 - canvas container (div)
