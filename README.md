@@ -2,6 +2,9 @@
 
 ![Local GIF](./demo/camera-demo.gif)
 
+# Live:
+https://jak-and-daxter-fishing-game.vercel.app/
+
 # Setup the Player
 A player object has four parameters:
 - canvas container (div)
